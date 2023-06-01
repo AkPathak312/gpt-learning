@@ -6,7 +6,7 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 
-sample_pdf= open(r'static\pdffiles\8_Physical_Science.pdf',mode='rb')
+sample_pdf= open('static\pdffiles\8_Physical_Science.pdf',mode='rb')
 
 def processPdf(queryText):
     openAiKey='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'
