@@ -1,0 +1,65 @@
+{% extends 'navbar.html' %}
+
+{% block body %}
+<div>
+    <div style="padding:10px; margin:40px" class="row">
+        <div  class="col-3">
+            <div class="container">
+                <div class="row">
+                  <ul class="list-group">
+                    {% for topic in topicdata %}
+                    <div>
+                      {% comment %} <form action='' method='POST'> {% endcomment %}
+                    <li type='submit' name='topicTitle' class="list-group-item" >{{topic.order_number}}. {{topic.topic_name}}</li>
+                      {% comment %} </form> {% endcomment %}
+                    </div>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+        </div>
+        <div class="col-8" style="margin-left:10px">
+            <p style="font-size: 22px;">Topic Summary</p>
+            <form action="" method='POST'>{% csrf_token %} 
+            <p style="font-size: 18px;">{{topicSummary}}</p>
+            <input type="hidden" name="topciSummaryTextArea" value="{{topicSummary}}"/>.
+            <button type="submit" name='textToSpeechBtn' class="btn btn-light">Text to Speech 🗣</button>
+          </form>
+               
+                <br></br>
+                <form method='POST'>
+                <p style="font-size: 22px;">Ask a Question</p>
+                <textarea name='queryText' class="form-control" style="height:150px" aria-label="With textarea" required></textarea>
+                <br></br>
+                  {% csrf_token %}
+                  <button name='submitButton' type="submit" class="btn btn-light">Submit Question</button>
+                </form>
+                <br></br>
+                
+                <p style="font-size: 22px;">Assignments</p>
+                <form action="" method='POST'>
+                  {% csrf_token %}
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Fill in the Blanks" required>
+                      <label class="form-check-label" for="inlineRadio1">Fill in the Blanks</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Multiple Choice Questions" required>
+                      <label class="form-check-label" for="inlineRadio2">Multiple Choice Questions</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Subjetive Questions" required>
+                      <label class="form-check-label" for="inlineRadio3">Subjective</label>
+                    </div>
+                    <br></br>
+                    <button type="submit" class="btn btn-light">Generate Assignment</button>
+                </form>
+                  {% comment %} Response Div  {% endcomment %}            
+                  <div class="overflow-auto" style="margin-top:30px">
+                    <p style="font-size: 22px;">Response</p>
+                    <p name="responseText" style="font-size: 18px;">{{responseText}}</p>
+                  </div>
+        </div>
+      </div>
+</div>
+{% endblock body %}
